@@ -7,7 +7,7 @@ const PORT = 4000;
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-const mongoDB = 'mongodb://admin:admin123#@ds241408.mlab.com:41408/dm_lab7'
+const mongoDB = 'mongodb+srv://dave1:dave1@cluster0-rivup.mongodb.net/test?retryWrites=true&w=majority'
 mongoose.connect(mongoDB, {useNewUrlParser:true});
 
 const Schema = mongoose.Schema;
@@ -63,6 +63,22 @@ app.get('/api/movies', (req,res,next) => {
   //   movies: movies
   // });
 })
+
+
+app.delete('/api/movies/:id',(req,res)=>{
+
+console.log(req.params.id);
+MovieModel.deleteOne({_id:req.params.id},(error,data)=>{
+if(error)
+res.json(error);
+  res.json(data);
+})
+
+})
+
+
+
+
 
 app.post('/api/movies', (req,res) =>{
 console.log('post Sucessfull');
